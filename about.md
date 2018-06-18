@@ -2,7 +2,7 @@
 layout: blog
 title: 关于zhaoxb
 description: "关于zhaoxb的介绍"
-data: 2018-06-17 00:00:00
+date: 2018-06-17 00:00:00
 tags: 
 - zhaoxb
 - 简述
