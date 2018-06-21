@@ -115,8 +115,8 @@
                 return result;
             },
             createPostDirectory = function(article, directory, isDirNum) {
-                var contentArr = [],
-                    titleId = [],
+                var contentArr = [], //标题元素的内容数组
+                    titleId = [],  //标题元素的id组成的数组。
                     levelArr, root, level,
                     currentList, list, li, link, i, len;
                 levelArr = (function(article, contentArr, titleId) {
@@ -130,26 +130,31 @@
                         guid = 1,
                         id = 'directory' + (Math.random() + '').replace(/\D/, ''),
                         lastRevNum, num, elem;
-                    while (titleElem.length) {
-                        elem = titleElem.shift();
-                        //获取标题的内容
-                        contentArr.push(elem.innerHTML);
-                        //获取标题的元素标签名的数字
+                    while (titleElem.length) {  //遍历标题数组
+                        elem = titleElem.shift();  //弹出一个标题节点
+                        //获取标题的内容，保存至内容数组
+                        contentArr.push(elem.innerHTML);  
+                        //获取标题的元素标签名的数字。如：h3 ==> num:3
+                        //一元正号运算符 用于将其他类型的变量转换成数字类型。
                         num = +elem.tagName.match(/\d/)[0];
-                        if (num > lastNum) {
+                        if (num > lastNum) {  //读到子标题
                             levelArr.push(1);
                             lastRevNum += 1;
-                        } else if (num === lastRevNum ||
-                            (num > lastRevNum && num <= lastNum)) {
+                        } else if (num == lastRevNum ||   //标题级别和lastRevNum相等或（比lastRevNum大）
+                            (num > lastRevNum && num <= lastNum)) {  //读到平级标题
                             levelArr.push(0);
                             lastRevNum = lastRevNum;
-                        } else if (num < lastRevNum) {
+                        } else if (num < lastRevNum) {   //读到新的顶层标题？
                             levelArr.push(num - lastRevNum);
                             lastRevNum = num;
                         }
+                        //累加levelArr的值；
                         count += levelArr[levelArr.length - 1];
+                        //保存上一个元素的h号；
                         lastNum = num;
+                        //elem.id存在则不改变，不存在时，利用math随机产生；
                         elem.id = elem.id || (id + guid++);
+                        //保存到titleId
                         titleId.push(elem.id);
                     }
                     if (count !== 0 && levelArr[0] === 1) levelArr[0] = 0;
