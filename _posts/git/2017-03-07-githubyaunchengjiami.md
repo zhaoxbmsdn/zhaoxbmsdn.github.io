@@ -2,7 +2,7 @@
 layout: blog
 istop: true
 title: "GitHub当作私密的版本控制系统远端版本库私有化哈"
-background-image: style/images/preference/illustration-welcome-git-users.png
+background-image: http://111.231.216.136/preference/git.png
 date:  2017-03-07
 category: git
 tags:
